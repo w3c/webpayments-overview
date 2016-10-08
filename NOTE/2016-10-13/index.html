@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" typeof="bibo:Document w3p:NOTE" prefix="bibo: http://purl.org/ontology/bibo/ w3p: http://www.w3.org/2001/02pd/rec54#">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta lang="" property="dc:language" content="en">
+  <style>
+    /*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+    
+    .hljs {
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      color: #333;
+      background: #f8f8f8;
+    }
+    
+    .hljs-comment,
+    .hljs-quote {
+      color: #998;
+      font-style: italic;
+    }
+    
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-subst {
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .hljs-number,
+    .hljs-literal,
+    .hljs-variable,
+    .hljs-template-variable,
+    .hljs-tag .hljs-attr {
+      color: #008080;
+    }
+    
+    .hljs-string,
+    .hljs-doctag {
+      color: #d14;
+    }
+    
+    .hljs-title,
+    .hljs-section,
+    .hljs-selector-id {
+      color: #900;
+      font-weight: bold;
+    }
+    
+    .hljs-subst {
+      font-weight: normal;
+    }
+    
+    .hljs-type,
+    .hljs-class .hljs-title {
+      color: #458;
+      font-weight: bold;
+    }
+    
+    .hljs-tag,
+    .hljs-name,
+    .hljs-attribute {
+      color: #000080;
+      font-weight: normal;
+    }
+    
+    .hljs-regexp,
+    .hljs-link {
+      color: #009926;
+    }
+    
+    .hljs-symbol,
+    .hljs-bullet {
+      color: #990073;
+    }
+    
+    .hljs-built_in,
+    .hljs-builtin-name {
+      color: #0086b3;
+    }
+    
+    .hljs-meta {
+      color: #999;
+      font-weight: bold;
+    }
+    
+    .hljs-deletion {
+      background: #fdd;
+    }
+    
+    .hljs-addition {
+      background: #dfd;
+    }
+    
+    .hljs-emphasis {
+      font-style: italic;
+    }
+    
+    .hljs-strong {
+      font-weight: bold;
+    }
+  </style>
+  <style>
+    /* --- ISSUES/NOTES --- */
+    
+    div.issue-title,
+    div.note-title,
+    div.ednote-title,
+    div.warning-title {
+      padding-right: 1em;
+      min-width: 7.5em;
+      color: #b9ab2d;
+    }
+    
+    div.issue-title {
+      color: #e05252;
+    }
+    
+    div.note-title,
+    div.ednote-title {
+      color: #2b2;
+    }
+    
+    div.warning-title {
+      color: #f22;
+    }
+    
+    div.issue-title span,
+    div.note-title span,
+    div.ednote-title span,
+    div.warning-title span {
+      text-transform: uppercase;
+    }
+    
+    div.note,
+    div.issue,
+    div.ednote,
+    div.warning {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+    
+    .note>p:first-child,
+    .ednote>p:first-child,
+    .issue>p:first-child,
+    .warning>p:first-child {
+      margin-top: 0
+    }
+    
+    .issue,
+    .note,
+    .ednote,
+    .warning {
+      padding: .5em;
+      border-left-width: .5em;
+      border-left-style: solid;
+    }
+    
+    div.issue,
+    div.note,
+    div.ednote,
+    div.warning {
+      padding: 1em 1.2em 0.5em;
+      margin: 1em 0;
+      position: relative;
+      clear: both;
+    }
+    
+    span.note,
+    span.ednote,
+    span.issue,
+    span.warning {
+      padding: .1em .5em .15em;
+    }
+    
+    .issue {
+      border-color: #e05252;
+      background: #fbe9e9;
+    }
+    
+    .note,
+    .ednote {
+      border-color: #52e052;
+      background: #e9fbe9;
+    }
+    
+    .warning {
+      border-color: #f11;
+      border-width: .2em;
+      border-style: solid;
+      background: #fbe9e9;
+    }
+    
+    .warning-title:before {
+      content: "⚠";
+      /*U+26A0 WARNING SIGN*/
+      font-size: 3em;
+      float: left;
+      height: 100%;
+      padding-right: .3em;
+      vertical-align: top;
+      margin-top: -0.5em;
+    }
+    
+    li.task-list-item {
+      list-style: none;
+    }
+    
+    input.task-list-item-checkbox {
+      margin: 0 0.35em 0.25em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style id="respec-mainstyle">
+    /*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+    /* Override code highlighter background */
+    
+    .hljs {
+      background: transparent !important;
+    }
+    /* --- INLINES --- */
+    
+    em.rfc2119 {
+      text-transform: lowercase;
+      font-variant: small-caps;
+      font-style: normal;
+      color: #900;
+    }
+    
+    h1 acronym,
+    h2 acronym,
+    h3 acronym,
+    h4 acronym,
+    h5 acronym,
+    h6 acronym,
+    a acronym,
+    h1 abbr,
+    h2 abbr,
+    h3 abbr,
+    h4 abbr,
+    h5 abbr,
+    h6 abbr,
+    a abbr {
+      border: none;
+    }
+    
+    dfn {
+      font-weight: bold;
+    }
+    
+    a.internalDFN {
+      color: inherit;
+      border-bottom: 1px solid #99c;
+      text-decoration: none;
+    }
+    
+    a.externalDFN {
+      color: inherit;
+      border-bottom: 1px dotted #ccc;
+      text-decoration: none;
+    }
+    
+    a.bibref {
+      text-decoration: none;
+    }
+    
+    cite .bibref {
+      font-style: normal;
+    }
+    
+    code {
+      color: #C83500;
+    }
+    
+    th code {
+      color: inherit;
+    }
+    /* --- TOC --- */
+    
+    .toc a,
+    .tof a {
+      text-decoration: none;
+    }
+    
+    a .secno,
+    a .figno {
+      color: #000;
+    }
+    
+    ul.tof,
+    ol.tof {
+      list-style: none outside none;
+    }
+    
+    .caption {
+      margin-top: 0.5em;
+      font-style: italic;
+    }
+    /* --- TABLE --- */
+    
+    table.simple {
+      border-spacing: 0;
+      border-collapse: collapse;
+      border-bottom: 3px solid #005a9c;
+    }
+    
+    .simple th {
+      background: #005a9c;
+      color: #fff;
+      padding: 3px 5px;
+      text-align: left;
+    }
+    
+    .simple th[scope="row"] {
+      background: inherit;
+      color: inherit;
+      border-top: 1px solid #ddd;
+    }
+    
+    .simple td {
+      padding: 3px 10px;
+      border-top: 1px solid #ddd;
+    }
+    
+    .simple tr:nth-child(even) {
+      background: #f0f6ff;
+    }
+    /* --- DL --- */
+    
+    .section dd>p:first-child {
+      margin-top: 0;
+    }
+    
+    .section dd>p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .section dd {
+      margin-bottom: 1em;
+    }
+    
+    .section dl.attrs dd,
+    .section dl.eldef dd {
+      margin-bottom: 0;
+    }
+    
+    .respec-hidden {
+      display: none;
+    }
+    
+    @media print {
+      .removeOnSave {
+        display: none;
+      }
+    }
+  </style>
+  <title>Web Payments Overview 1.0</title>
+
+  <!--
+      === NOTA BENE ===
+      For the three scripts below, if your spec resides on dev.w3 you can check them
+      out in the same tree and use relative links so that they'll work offline,
+     -->
+  <link rel="stylesheet" href="spec.css">
+
+
+
+  <style>
+    .sequence-diagram {
+      margin: auto;
+    }
+  </style>
+  <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-NOTE">
+  <!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]-->
+  <meta name="generator" content="ReSpec 5.0.4">
+  <script id="initialUserConfig" type="application/json">
+    {
+      "specStatus": "NOTE",
+      "shortName": "payments-overview",
+      "publishDate": "2016-10-13",
+      "edDraftURI": "https://w3c.github.io/webpayments-overview/",
+      "editors": [
+      {
+        "name": "Manu Sporny",
+        "url": "https://manu.sporny.org/",
+        "company": "Digital Bazaar",
+        "companyURL": "http://digitalbazaar.com/"
+      },
+      {
+        "name": "Adrian Hope-Bailie",
+        "url": "https://www.linkedin.com/in/adrianhopebailie",
+        "company": "Ripple",
+        "companyURL": "https://ripple.com/"
+      },
+      {
+        "name": "Nick Telford-Reed",
+        "url": "https://www.linkedin.com/in/nicktr",
+        "company": "Worldpay",
+        "companyURL": "http://www.worldpay.com/"
+      },
+      {
+        "name": "Roy McElmurry",
+        "url": "https://www.linkedin.com/in/roy-mcelmurry-73349040",
+        "company": "Facebook",
+        "companyURL": "https://www.facebook.com/"
+      },
+      {
+        "name": "Dapeng Liu",
+        "url": "https://www.linkedin.com/in/dapeng-liu-77471823",
+        "company": "Alibaba",
+        "companyURL": "https://www.alibaba.com/"
+      }],
+      "authors": [
+      {
+        "name": "Manu Sporny",
+        "url": "https://manu.sporny.org/",
+        "company": "Digital Bazaar",
+        "companyURL": "http://digitalbazaar.com/"
+      }],
+      "wg": "W3C Web Payments Working Group",
+      "wgURI": "https://www.w3.org/Payments/WG/",
+      "wgPublicList": "public-payments-wg",
+      "otherLinks": [
+      {
+        "key": "Source code",
+        "data": [
+        {
+          "value": "https://github.com/w3c/webpayments-overview",
+          "href": "https://github.com/w3c/webpayments-overview"
+        }]
+      },
+      {
+        "key": "Issue tracker",
+        "data": [
+        {
+          "value": "https://github.com/w3c/webpayments-overview/issues",
+          "href": "https://github.com/w3c/webpayments-overview/issues"
+        }]
+      }],
+      "wgPatentURI": "https://www.w3.org/2004/01/pp-impl/83744/status",
+      "maxTocLevel": 4,
+      "preProcess": []
+    }
+  </script>
+</head>
+
+<body class="h-entry" role="document" id="respecDocument">
+  <div class="head" role="contentinfo" id="respecHeader">
+    <p>
+      <a class="logo" href="https://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C"></a>
+    </p>
+    <h1 class="title p-name" id="title" property="dcterms:title">Web Payments Overview 1.0</h1>
+    <h2 id="w3c-working-group-note-13-october-2016"><abbr title="World Wide Web Consortium">W3C</abbr> Working Group Note <time property="dcterms:issued" class="dt-published" datetime="2016-10-13">13 October 2016</time></h2>
+    <dl>
+      <dt>This version:</dt>
+      <dd><a class="u-url" href="https://www.w3.org/TR/2016/NOTE-payments-overview-20161013/">https://www.w3.org/TR/2016/NOTE-payments-overview-20161013/</a></dd>
+      <dt>Latest published version:</dt>
+      <dd><a href="https://www.w3.org/TR/payments-overview/">https://www.w3.org/TR/payments-overview/</a></dd>
+      <dt>Latest editor's draft:</dt>
+      <dd><a href="https://w3c.github.io/webpayments-overview/">https://w3c.github.io/webpayments-overview/</a></dd>
+      <dt>Editors:</dt>
+      <dd class="p-author h-card vcard" property="bibo:editor" resource="_:editor0"><span property="rdf:first" typeof="foaf:Person"><meta property="foaf:name" content="Manu Sporny"><a class="u-url url p-name fn" property="foaf:homepage" href="https://manu.sporny.org/">Manu Sporny</a>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://digitalbazaar.com/">Digital Bazaar</a></span>
+        <span property="rdf:rest" resource="_:editor1"></span>
+      </dd>
+      <dd class="p-author h-card vcard" resource="_:editor1"><span property="rdf:first" typeof="foaf:Person"><meta property="foaf:name" content="Adrian Hope-Bailie"><a class="u-url url p-name fn" property="foaf:homepage" href="https://www.linkedin.com/in/adrianhopebailie">Adrian Hope-Bailie</a>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="https://ripple.com/">Ripple</a></span>
+        <span property="rdf:rest" resource="_:editor2"></span>
+      </dd>
+      <dd class="p-author h-card vcard" resource="_:editor2"><span property="rdf:first" typeof="foaf:Person"><meta property="foaf:name" content="Nick Telford-Reed"><a class="u-url url p-name fn" property="foaf:homepage" href="https://www.linkedin.com/in/nicktr">Nick Telford-Reed</a>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://www.worldpay.com/">Worldpay</a></span>
+        <span property="rdf:rest" resource="_:editor3"></span>
+      </dd>
+      <dd class="p-author h-card vcard" resource="_:editor3"><span property="rdf:first" typeof="foaf:Person"><meta property="foaf:name" content="Roy McElmurry"><a class="u-url url p-name fn" property="foaf:homepage" href="https://www.linkedin.com/in/roy-mcelmurry-73349040">Roy McElmurry</a>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="https://www.facebook.com/">Facebook</a></span>
+        <span property="rdf:rest" resource="_:editor4"></span>
+      </dd>
+      <dd class="p-author h-card vcard" resource="_:editor4"><span property="rdf:first" typeof="foaf:Person"><meta property="foaf:name" content="Dapeng Liu"><a class="u-url url p-name fn" property="foaf:homepage" href="https://www.linkedin.com/in/dapeng-liu-77471823">Dapeng Liu</a>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="https://www.alibaba.com/">Alibaba</a></span>
+        <span property="rdf:rest" resource="rdf:nil"></span>
+      </dd>
+
+      <dt>Author:</dt>
+      <dd class="p-author h-card vcard"><span property="dc:contributor" typeof="foaf:Person"><meta property="foaf:name" content="Manu Sporny"><a class="u-url url p-name fn" property="foaf:homepage" href="https://manu.sporny.org/">Manu Sporny</a>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://digitalbazaar.com/">Digital Bazaar</a></span>
+      </dd>
+
+      <dt>Source code:</dt>
+      <dd>
+        <a href="https://github.com/w3c/webpayments-overview">
+                      https://github.com/w3c/webpayments-overview
+                    </a>
+      </dd>
+      <dt>Issue tracker:</dt>
+      <dd>
+        <a href="https://github.com/w3c/webpayments-overview/issues">
+                      https://github.com/w3c/webpayments-overview/issues
+                    </a>
+      </dd>
+    </dl>
+    <p class="copyright">
+      <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2016
+
+      <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
+      <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>,
+      <a href="https://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>).
+      <abbr title="World Wide Web Consortium">W3C</abbr> <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+      <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and
+      <a rel="license" href="https://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.
+    </p>
+    <hr title="Separator for header">
+  </div>
+
+  <section id="abstract" class="introductory" property="dc:abstract">
+    <h2 id="h-abstract" resource="#h-abstract"><span property="xhv:role" resource="xhv:heading">Abstract</span></h2>
+    <p>
+      This document outlines the Web Payments ecosystem by introducing readers to the goals of the ecosystem, messages, roles, and information flow in the system. Links to specifications that define each aspect of the ecosystem in more detail are also included for implementers.
+    </p>
+  </section>
+
+  <section id="sotd" class="introductory">
+    <h2 id="h-sotd" resource="#h-sotd"><span property="xhv:role" resource="xhv:heading">Status of This Document</span></h2>
+    <p>
+      <em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision of this technical report can be found in the <a href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at https://www.w3.org/TR/.</em>
+    </p>
+
+    <p>
+      Further updates to this note are expected in the following months. This document is not currently in its final form.
+    </p>
+
+    <p>
+      This document was published by the <a href="https://www.w3.org/Payments/WG/"><abbr title="World Wide Web Consortium">W3C</abbr> Web Payments Working Group</a> as a Working Group Note. If you wish to make comments regarding this document, please send them to
+      <a href="mailto:public-payments-wg@w3.org">public-payments-wg@w3.org</a> (<a href="mailto:public-payments-wg-request@w3.org?subject=subscribe">subscribe</a>,
+      <a href="https://lists.w3.org/Archives/Public/public-payments-wg/">archives</a>). All comments are welcome.
+    </p>
+    <p>
+      Publication as a Working Group Note does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr> Membership. This is a draft document and may be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite this document as other than work in progress.
+    </p>
+    <p>
+      This document was produced by a group operating under the
+      <a id="sotd_patent" property="w3p:patentRules" href="https://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <abbr title="World Wide Web Consortium">W3C</abbr> Patent
+              Policy</a>.
+      <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="https://www.w3.org/2004/01/pp-impl/83744/status" rel="disclosure">public list of any patent
+                disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains
+      <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+              Claim(s)</a> must disclose the information in accordance with
+      <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+              6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+    </p>
+    <p>This document is governed by the <a id="w3c_process_revision" href="https://www.w3.org/2015/Process-20150901/">1 September 2015 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+    </p>
+
+  </section>
+  <nav id="toc">
+    <h2 class="introductory" id="table-of-contents" resource="#table-of-contents"><span property="xhv:role" resource="xhv:heading">Table of Contents</span></h2>
+    <ol class="toc" role="directory">
+      <li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li>
+      <li class="tocline"><a href="#goals" class="tocxref"><span class="secno">2. </span>Web Payments Goals</a></li>
+      <li class="tocline"><a href="#the-structure-of-payment-messages" class="tocxref"><span class="secno">3. </span>The Structure of Payment Messages</a></li>
+      <li class="tocline"><a href="#roles-in-the-ecosystem" class="tocxref"><span class="secno">4. </span>Roles in the Ecosystem</a></li>
+      <li class="tocline"><a href="#an-exemplary-use-case" class="tocxref"><span class="secno">5. </span>An Exemplary Use Case</a></li>
+      <li class="tocline"><a href="#implementing-web-payments-software" class="tocxref"><span class="secno">6. </span>Implementing Web Payments Software</a></li>
+    </ol>
+  </nav>
+
+
+
+  <section class="informative" id="introduction" typeof="bibo:Chapter" resource="#introduction" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-introduction" resource="#h-introduction"><span property="xhv:role" resource="xhv:heading"><span class="secno">1. </span>Introduction</span>
+    </h2>
+    <p><em>This section is non-normative.</em></p>
+
+    <p>
+      This document outlines the Web Payments ecosystem. It starts by highlighting the goals of the ecosystem, then covers the primary types of messages exchanged and the roles of participants in the system. An example use case is then used to demonstrate how roles in the system communicate. Finally, specifications that detail each aspect of the ecosystem in more detail are also provided for implementers.
+    </p>
+
+  </section>
+
+  <section typeof="bibo:Chapter" resource="#goals" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="goals" resource="#goals"><span property="xhv:role" resource="xhv:heading"><span class="secno">2. </span>Web Payments Goals</span>
+    </h2>
+
+    <p>
+      The Web Payments ecosystem strives to support fundamental Web principles by:
+    </p>
+
+    <ul>
+      <li>Adhering to Web architecture fundamentals</li>
+      <li>Supporting network and device independence</li>
+      <li>Providing for payers and payees with differing physical and cognitive abilities
+      </li>
+      <li>Being machine-readable where possible to enable automation and engagement of non-human entities</li>
+      <li>Protecting the privacy of all participants</li>
+    </ul>
+
+    <p>
+      In addition to the fundamental Web principles above, the Web Payments ecosystem also strives to:
+    </p>
+
+    <ul>
+      <li>Improve the interface experience for all stakeholders</li>
+      <li>Provide stakeholders with unencumbered knowledge and choice when undertaking a payment</li>
+      <li>Support a wide spectrum of security and privacy needs to meet industry expectations</li>
+      <li>Support existing payment schemes while enabling new ones</li>
+      <li>Encourage efficient settlement</li>
+      <li>Facilitate compliance with legal and regulatory obligations</li>
+      <li>Enable monetization on the spectrum of Web to native apps</li>
+      <li>Bridge distributed value networks</li>
+    </ul>
+
+  </section>
+
+  <section id="the-structure-of-payment-messages" typeof="bibo:Chapter" resource="#the-structure-of-payment-messages" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-the-structure-of-payment-messages" resource="#h-the-structure-of-payment-messages"><span property="xhv:role" resource="xhv:heading"><span class="secno">3. </span>The Structure of Payment Messages</span>
+    </h2>
+
+    <p>
+      A payment request is composed of the following parts:
+    </p>
+
+    <dl>
+      <dt><strong><em>Payment Methods</em></strong></dt>
+      <dd>
+        The methods of payment that may be used for processing the payment request. Examples include: credit card, direct debit, SEPA Credit Transfer, and Bitcoin.
+      </dd>
+      <dt><strong><em>Payment Details</em></strong></dt>
+      <dd>
+        Specific information pertaining to the transaction. Examples include: price, transaction reference number, and items being purchased.
+      </dd>
+      <dt><strong><em>Payment Options</em></strong></dt>
+      <dd>
+        A set of information that needs to be collected from the payer in order for the transaction to be fulfilled. Examples include: shipping options, requests for shipping address, and requests for contact information.
+      </dd>
+    </dl>
+
+    <figure id="fig-the-structure-of-a-payment-request.x">
+      <img style="margin: auto; display: block; width: 50%;" src="request.svg">
+      <figcaption style="text-align: center;">Fig. <span class="figno">1</span> <span class="fig-title">
+- The structure of a payment request.
+    </span></figcaption>
+    </figure>
+
+    <div class="issue" id="issue-1">
+      <div class="issue-title marker" aria-level="3" role="heading" id="h-issue1"><span>Issue 1</span></div>
+      <p class="">
+        A concern has been raised over the structure of a payment request, notably that there are other forms of messages that may be initiated by a payer. There is currently a proposal to modify payment request to a more generalized "payment instruction" that would be capable of expressing other messages like subscriptions, preauthorizations, refunds, and other sorts of payment-related instructions.
+      </p>
+    </div>
+
+    <p>
+      A payment response is composed of the following parts:
+    </p>
+
+    <dl>
+      <dt><strong><em>Payment Method</em></strong></dt>
+      <dd>
+        The selected mechanism that was used for processing the payment. Examples include: credit card, ACH, SEPA, and Bitcoin.
+      </dd>
+      <dt><strong><em>Transaction Details</em></strong></dt>
+      <dd>
+        Specific information pertaining to the transaction. Examples include: transaction reference number, price, and items purchased.
+      </dd>
+      <dt><strong><em>Response Details</em></strong></dt>
+      <dd>
+        Information that pertains to the result of processing the payment including all information requested in the initial payment request. Examples include: selected shipping option, shipping address, and contact email.
+      </dd>
+    </dl>
+
+    <figure id="fig-the-structure-of-a-payment-response.x">
+      <img style="margin: auto; display: block; width: 50%;" src="response.svg">
+      <figcaption style="text-align: center;">Fig. <span class="figno">2</span> <span class="fig-title">
+- The structure of a payment response.
+    </span></figcaption>
+    </figure>
+
+
+  </section>
+
+  <section id="roles-in-the-ecosystem" typeof="bibo:Chapter" resource="#roles-in-the-ecosystem" property="bibo:hasPart">
+
+    <!--OddPage-->
+    <h2 id="h-roles-in-the-ecosystem" resource="#h-roles-in-the-ecosystem"><span property="xhv:role" resource="xhv:heading"><span class="secno">4. </span>Roles in the Ecosystem</span>
+    </h2>
+
+    <p>
+      There are a number of roles and interactions in the Web Payments ecosystem. A role is an abstraction that might be implemented in many different ways. The separation of roles suggests likely interfaces and/or protocols for standardization. The following roles exist in the Web Payments ecosystem:
+    </p>
+
+    <dl>
+      <dt><strong><em>Payer</em></strong></dt>
+      <dd>
+        An entity transmitting value to the Payee.
+      </dd>
+      <dt><strong><em>Payee</em></strong></dt>
+      <dd>
+        An entity receiving value from the Payer.
+      </dd>
+      <dt><strong><em>Mediator</em></strong></dt>
+      <dd>
+        Routes payment requests between the Payee and the Payment App.
+      </dd>
+      <dt><strong><em>Payment App</em></strong></dt>
+      <dd>
+        Processes payment requests sent via the Mediator and returns payment responses to the Mediator. It may communicate with Payment Networks to execute a payment instruction or it may return data so that another entity can execute a payment instruction.
+      </dd>
+      <dt><strong><em>Payment Network</em></strong></dt>
+      <dd>
+        A system that is responsible for transferring value from one entity to another.
+      </dd>
+    </dl>
+
+    <figure id="fig-roles-in-the-web-payments-ecosystem">
+      <img style="margin: auto; display: block;" src="ecosystem.svg">
+      <figcaption style="text-align: center;">Fig. <span class="figno">3</span> <span class="fig-title">
+- Roles in the Web Payments ecosystem
+    </span></figcaption>
+    </figure>
+
+    <p>
+      As the diagram above depicts, the Web Payments ecosystem separates the following concerns:
+    </p>
+
+    <ul>
+      <li>
+        The role that creates the payment request (Payee) is separated from the role that routes the payment request to the entity that will process it (Mediator).
+      </li>
+      <li>
+        The role that routes the payment request (Mediator) is separated from the role that processes the payment request (Payment App).
+      </li>
+      <li>
+        The role that processes the payment request/response (Payment App/Payee) is separated from the role that transfers the value associated with the request/response (Payment Network).
+      </li>
+    </ul>
+
+  </section>
+
+  <section id="an-exemplary-use-case" typeof="bibo:Chapter" resource="#an-exemplary-use-case" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-an-exemplary-use-case" resource="#h-an-exemplary-use-case"><span property="xhv:role" resource="xhv:heading"><span class="secno">5. </span>An Exemplary Use Case</span>
+    </h2>
+
+    <p>
+      In order to understand how all of the actors and roles in the ecosystem interact, consider the following use case:
+    </p>
+
+    <p>
+      Quinn would like to purchase a new laptop using her new security-enhanced credit card.
+    </p>
+
+    <h2 id="payer-registers-payment-app">Payer Registers Payment App</h2>
+
+    <div class="issue" id="issue-2">
+      <div class="issue-title marker" aria-level="3" role="heading" id="h-issue2"><span>Issue 2</span></div>
+      <p class="">
+        Note that this section is currently speculative and will be updated once consensus forms around a corresponding payment application registration specification, which is currently under development.
+      </p>
+    </div>
+
+    <p>
+      In order for Quinn (Payer) to use her new security-enhanced credit card, she must enroll it via her bank's website (Payment App).
+    </p>
+
+    <figure id="fig-the-payer-registers-a-new-payment-app">
+      <img style="margin: auto; display: block;" src="flow-register.svg">
+      <figcaption style="text-align: center;">Fig. <span class="figno">4</span> <span class="fig-title">
+- The Payer Registers a New Payment App
+    </span></figcaption>
+    </figure>
+
+    <h2 id="payer-makes-a-purchase">Payer Makes a Purchase</h2>
+
+    <p>
+      Quinn (Payer) finds the laptop she wants on a website (Payee). She clicks "Buy", selects the information necessary to complete the transaction, and is notified that her purchase is successful and is on its way.
+    </p>
+
+    <figure id="fig-payer-makes-a-purchase">
+      <img style="margin: auto; display: block;" src="flow-purchase.svg">
+      <figcaption style="text-align: center;">Fig. <span class="figno">5</span> <span class="fig-title">
+- Payer Makes a Purchase
+    </span></figcaption>
+    </figure>
+
+  </section>
+
+
+  <section id="implementing-web-payments-software" typeof="bibo:Chapter" resource="#implementing-web-payments-software" property="bibo:hasPart">
+
+    <!--OddPage-->
+    <h2 id="h-implementing-web-payments-software" resource="#h-implementing-web-payments-software"><span property="xhv:role" resource="xhv:heading"><span class="secno">6. </span>Implementing Web Payments Software</span>
+    </h2>
+
+    <p>
+      There are a number of specifications that are of interest to developers implementing portions of the ecosystem outlined in this document.
+    </p>
+
+    <dl>
+      <dt><a href="https://www.w3.org/TR/payment-method-id/">Payment Methods</a> and <a href="https://www.w3.org/TR/payment-method-basic-card/">Basic Card</a></dt>
+      <dd>
+        Details how payment methods are identified and how new payment methods are specified.
+      </dd>
+      <dt><a href="https://w3c.github.io/webpayments-payment-apps-api/">Web Payment Applications</a></dt>
+      <dd>
+        Specifies how messages are exchanged between a payment app and a mediator.
+      </dd>
+      <dt><a href="https://www.w3.org/TR/webpayments-http-messages/">Web Payments HTTP Messages</a></dt>
+      <dd>
+        Message types and content used by the Web Payments HTTP API.
+      </dd>
+      <dt><a href="https://www.w3.org/TR/webpayments-http-api/">Web Payments HTTP API</a></dt>
+      <dd>
+        Specifies how Web Payments HTTP Messages are exchanged via an HTTP client and server.
+      </dd>
+      <dt><a href="https://www.w3.org/TR/payment-request/">Web Payments Browser API</a></dt>
+      <dd>
+        Specifies how messages are transmitted and processed via a Web browser.
+      </dd>
+    </dl>
+
+  </section>
+
+
+
+  <p role="navigation" id="back-to-top"><a href="#toc"><abbr title="Back to Top">↑</abbr></a></p>
+  <script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script>
+</body>
+</html>
