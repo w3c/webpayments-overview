@@ -3,4 +3,5 @@
 , "contacts": ["ianbjacobs"]
 , "shortName": "webpayments-overview"
 , "repo-type": "note"
+,   "exposed": false
 }
